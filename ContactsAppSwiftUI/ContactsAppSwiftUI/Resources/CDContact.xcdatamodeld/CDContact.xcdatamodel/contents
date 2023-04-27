@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDAddress" representedClassName="CDAddress" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+        <attribute name="street1" optional="YES" attributeType="String"/>
+        <attribute name="street2" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="zip" optional="YES" attributeType="String"/>
+        <relationship name="addToContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" inverseName="toAddress" inverseEntity="CDContact"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CDContact" representedClassName="CDContact" syncable="YES">
+        <attribute name="company" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="profilePic" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="toAddress" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAddress" inverseName="addToContact" inverseEntity="CDAddress"/>
+        <relationship name="toEmail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDEmail" inverseName="emailToContact" inverseEntity="CDEmail"/>
+        <relationship name="toMssg" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDInstantMessage" inverseName="mssgToContact" inverseEntity="CDInstantMessage"/>
+        <relationship name="toPhone" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPhone" inverseName="phnToContact" inverseEntity="CDPhone"/>
+        <relationship name="toSocial" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSocialProfile" inverseName="socialToContact" inverseEntity="CDSocialProfile"/>
+        <relationship name="toUrl" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDUrl" inverseName="urlToContact" inverseEntity="CDUrl"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CDEmail" representedClassName="CDEmail" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="emailToContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" inverseName="toEmail" inverseEntity="CDContact"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CDInstantMessage" representedClassName="CDInstantMessage" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="instantMessage" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="mssgToContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" inverseName="toMssg" inverseEntity="CDContact"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CDPhone" representedClassName="CDPhone" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="phnToContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" inverseName="toPhone" inverseEntity="CDContact"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CDSocialProfile" representedClassName="CDSocialProfile" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="socialProfile" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="socialToContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" inverseName="toSocial" inverseEntity="CDContact"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="CDUrl" representedClassName="CDUrl" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="urlToContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" inverseName="toUrl" inverseEntity="CDContact"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>
